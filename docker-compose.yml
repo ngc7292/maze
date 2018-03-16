@@ -1,0 +1,17 @@
+server:
+  restart: always
+  image: nginx
+  volumes:
+    - ./nginx/nginx_flask.conf:/etc/nginx/conf.d/flask_demo.conf
+  links:
+    - web
+  ports:
+    - "5000:5000"
+
+web:
+  restart: always
+  image: ngc7293/maze:0.1
+  working_dir: /home/project/maze
+  expose:
+    - "5000"
+  command: python /home/project/maze/test.py
